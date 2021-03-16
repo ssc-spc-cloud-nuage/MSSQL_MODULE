@@ -22,6 +22,6 @@ output "identity_object_id" {
 # https://github.com/hashicorp/terraform/issues/1178#issuecomment-449158607
 # and
 # https://github.com/hashicorp/terraform/issues/1178#issuecomment-473091030
-output "depended_on" {
-  value = "${null_resource.dependency_setter.id}-${timestamp()}"
-}
+# output "depended_on" {
+#   value = "${null_resource.dependency_setter.id}-${timestamp()}"
+# }
