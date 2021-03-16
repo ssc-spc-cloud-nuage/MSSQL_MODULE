@@ -105,14 +105,13 @@ variable "environment" {
 }
 
 variable "weekly_retention" {
-  description = ""
 }
 variable "monthly_retention" {
-  description = ""
 }
 variable "yearly_retention" {
-  description = ""
 }
 variable "week_of_year" {
-  description = ""
+}
+
+variable "retention_days" {
 }
