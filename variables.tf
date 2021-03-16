@@ -5,7 +5,6 @@ variable "sqlname" {
 }
 
 variable "sqldbname" {
-  type        = list(map(string))
   description = "A mapping of database name and collation for the MSSQL database(s)"
 }
 
