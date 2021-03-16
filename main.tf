@@ -9,7 +9,7 @@ resource "azurerm_sql_server" "mssql" {
 
 resource "azurerm_mssql_database" "mssql" {          
     name           = "${var.environment}-cio-${var.sqldbname}"
-    server_id      = azurerm_mssql_server.mssql.id
+    server_id      = azurerm_sql_server.mssql.id
     collation      = var.collation
     license_type = "LicenseIncluded"
     max_size_gb    = var.max_size_gb
@@ -30,7 +30,7 @@ resource "azurerm_mssql_database" "mssql" {
 }
 
 resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" { 
-  server_id                               = azurerm_mssql_server.mssql.id
+  server_id                               = azurerm_sql_server.mssql.id
   storage_endpoint                        = azurerm_storage_account.CIO-StorageAccount-sa.primary_blob_endpoint
   storage_account_access_key              = azurerm_storage_account.CIO-StorageAccount-sa.primary_access_key
   storage_account_access_key_is_secondary = false
@@ -39,7 +39,7 @@ resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" {
 
 resource "azurerm_mssql_server_security_alert_policy" "mssql" {  
   resource_group_name        = var.resource_group_name
-  server_name                =  azurerm_mssql_server.mssql.name
+  server_name                =  azurerm_sql_server.mssql.name
   state                      = "Enabled"
   storage_endpoint           = azurerm_storage_account.mssql.primary_blob_endpoint
   storage_account_access_key = azurerm_storage_account.mssql.primary_access_key
@@ -51,7 +51,7 @@ resource "azurerm_mssql_server_security_alert_policy" "mssql" {
 }
 
 resource "azurerm_sql_active_directory_administrator" "mssql" {  
-  server_name         = azurerm_mssql_server.mssql.name
+  server_name         = azurerm_sql_server.mssql.name
   resource_group_name = var.resource_group_name
   login               = "louis-eric.tremblay@ssc-spc.gc.ca"
   tenant_id           = var.active_directory_administrator_tenant_id
@@ -71,7 +71,7 @@ resource "azurerm_private_endpoint" "mssql" {
 
   private_service_connection {   
     name                           = "${var.environment}-cio-PrivateServiceConnection"
-    private_connection_resource_id =  azurerm_mssql_server.mssql.id
+    private_connection_resource_id =  azurerm_sql_server.mssql.id
     subresource_names              = ["sqlServer"]
     is_manual_connection           = false
   }
