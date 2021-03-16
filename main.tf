@@ -31,8 +31,8 @@ resource "azurerm_mssql_database" "mssql" {
 
 resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" { 
   server_id                               = azurerm_sql_server.mssql.id
-  storage_endpoint                        = azurerm_storage_account.CIO-StorageAccount-sa.primary_blob_endpoint
-  storage_account_access_key              = azurerm_storage_account.CIO-StorageAccount-sa.primary_access_key
+  storage_endpoint                        = azurerm_storage_account.mssql.primary_blob_endpoint
+  storage_account_access_key              = azurerm_storage_account.mssql.primary_access_key
   storage_account_access_key_is_secondary = false
   retention_in_days                       = 6
 } 
