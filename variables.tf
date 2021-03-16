@@ -113,5 +113,5 @@ variable "yearly_retention" {
 variable "week_of_year" {
 }
 
-variable "retention_days" {
+variable "policyretention_days" {
 }
