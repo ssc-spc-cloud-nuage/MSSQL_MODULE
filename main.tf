@@ -59,18 +59,18 @@ resource "azurerm_sql_active_directory_administrator" "mssql" {
 }
 
 resource "azurerm_private_endpoint" "mssql" { 
-  name                = "${var.environment}-cio-vcboardroom-pe"
+  name                = "${var.environment}-cio-${var.sqlname}-pe"
   location            = var.location
   resource_group_name = var.resource_group_name //"ScDc-CIO_APS_Network-rg"
   subnet_id           = var.subnet_id
 
   private_dns_zone_group {
-    name = "privatednszonegroup"
+    name = "${var.sqlname}privatednszonegroup"
     private_dns_zone_ids = [var.DnsPrivatezoneId]
   }
 
   private_service_connection {   
-    name                           = "${var.environment}-cio-PrivateServiceConnection"
+    name                           = "${var.environment}-cio-${var.sqlname}-psc"
     private_connection_resource_id =  azurerm_sql_server.mssql.id
     subresource_names              = ["sqlServer"]
     is_manual_connection           = false
