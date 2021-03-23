@@ -7,18 +7,17 @@ resource "azurerm_mssql_server" "mssql" {
   administrator_login_password  = var.administrator_login_password
   public_network_access_enabled = false
 
+  azuread_administrator {
+    login_username = "louis-eric.tremblay@ssc-spc.gc.ca"
+    object_id      =  var.active_directory_administrator_object_id
+  }
+
   extended_auditing_policy {
     storage_endpoint                        = azurerm_storage_account.mssql.primary_blob_endpoint
     storage_account_access_key              = azurerm_storage_account.mssql.primary_access_key
     storage_account_access_key_is_secondary = false
     retention_in_days                       = 6
-  }  
-  
-  azuread_administrator {
-    login_username = "louis-eric.tremblay@ssc-spc.gc.ca"
-    object_id      =  var.active_directory_administrator_object_id
-  }
-  
+  }    
 }
 
 resource "azurerm_mssql_database" "mssql" {          
