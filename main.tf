@@ -5,13 +5,18 @@ resource "azurerm_mssql_server" "mssql" {
   version                       = var.mssql_version
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
-
-extended_auditing_policy {
+  public_network_access_enabled = false
+  
+  extended_auditing_policy {
     storage_endpoint                        = azurerm_storage_account.mssql.primary_blob_endpoint
     storage_account_access_key              = azurerm_storage_account.mssql.primary_access_key
     storage_account_access_key_is_secondary = false
     retention_in_days                       = 6
   }  
+  azuread_administrator {
+    login_username = "louis-eric.tremblay@ssc-spc.gc.ca"
+    object_id      =  var.active_directory_administrator_object_id
+  }
   
 }
 
@@ -58,13 +63,13 @@ resource "azurerm_mssql_server_security_alert_policy" "mssql" {
   retention_days = 30
 }
 
-resource "azurerm_sql_active_directory_administrator" "mssql" {  
-  server_name         = azurerm_mssql_server.mssql.name
-  resource_group_name = var.resource_group_name
-  login               = "louis-eric.tremblay@ssc-spc.gc.ca"
-  tenant_id           = var.active_directory_administrator_tenant_id
-  object_id           = var.active_directory_administrator_object_id
-}
+# resource "azurerm_sql_active_directory_administrator" "mssql" {  
+#   server_name         = azurerm_mssql_server.mssql.name
+#   resource_group_name = var.resource_group_name
+#   login               = "louis-eric.tremblay@ssc-spc.gc.ca"
+#   tenant_id           = var.active_directory_administrator_tenant_id
+#   object_id           = var.active_directory_administrator_object_id
+# }
 
 resource "azurerm_private_endpoint" "mssql" { 
   name                = "${var.environment}-cio-${var.sqlname}-pe"
