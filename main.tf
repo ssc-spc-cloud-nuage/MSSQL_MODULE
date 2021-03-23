@@ -17,9 +17,7 @@ resource "azurerm_mssql_database" "mssql" {
     sku_name       = var.sku_name
     zone_redundant = var.zone_redundant
 
-  short_term_retention_policy {
-   
-  }
+  var.test
 
   long_term_retention_policy {
       weekly_retention = var.weekly_retention
