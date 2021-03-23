@@ -5,6 +5,7 @@ resource "azurerm_sql_server" "mssql" {
   version                       = var.mssql_version
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
+  public_network_access_enabled = false
 }
 
 resource "azurerm_mssql_database" "mssql" {          
