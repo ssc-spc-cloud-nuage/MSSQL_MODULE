@@ -1,13 +1,13 @@
 output "id" {
-  value = azurerm_sql_server.mssql.id
+  value = azurerm_mssql_server.mssql.id
 }
 
 output "name" {
-  value = azurerm_sql_server.mssql.name
+  value = azurerm_mssql_server.mssql.name
 }
 
 output "administrator_login" {
-  value = azurerm_sql_server.mssql.administrator_login
+  value = azurerm_mssql_server.mssql.administrator_login
 }
 
 
