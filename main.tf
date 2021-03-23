@@ -17,17 +17,17 @@ resource "azurerm_mssql_database" "mssql" {
     sku_name       = var.sku_name
     zone_redundant = var.zone_redundant
 
-  short_term_retention_policy {
-    retention_days = var.policyretention_days
-  }
-    
+    short_term_retention_policy {
+      retention_days = var.policyretention_days
+    }
+      
 
-  long_term_retention_policy {
-      weekly_retention = var.weekly_retention
-      monthly_retention = var.monthly_retention
-      yearly_retention = var.yearly_retention
-      week_of_year =  var.week_of_year
-  }
+    long_term_retention_policy {
+        weekly_retention = var.weekly_retention
+        monthly_retention = var.monthly_retention
+        yearly_retention = var.yearly_retention
+        week_of_year =  var.week_of_year
+    }
 }
 
 resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" { 
