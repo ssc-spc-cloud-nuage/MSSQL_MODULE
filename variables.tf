@@ -104,16 +104,16 @@ variable "environment" {
 }
 
 variable "weekly_retention" {
-  default     = null
+ 
 }
 variable "monthly_retention" {
-  default     = null
+ 
 }
 variable "yearly_retention" {
-  default     = null
+  
 }
 variable "week_of_year" {
-  default     = null
+  
 }
 
 
