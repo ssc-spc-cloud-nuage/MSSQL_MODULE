@@ -10,6 +10,7 @@ resource "azurerm_mssql_server" "mssql" {
   azuread_administrator {
     login_username = "louis-eric.tremblay@ssc-spc.gc.ca"
     object_id      =  var.active_directory_administrator_object_id
+    tenant_id           = var.active_directory_administrator_tenant_id
   }
 
   extended_auditing_policy {
