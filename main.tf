@@ -5,6 +5,13 @@ resource "azurerm_mssql_server" "mssql" {
   version                       = var.mssql_version
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
+
+extended_auditing_policy {
+    storage_endpoint                        = azurerm_storage_account.mssql.primary_blob_endpoint
+    storage_account_access_key              = azurerm_storage_account.mssql.primary_access_key
+    storage_account_access_key_is_secondary = false
+    retention_in_days                       = 6
+  }  
   
 }
 
