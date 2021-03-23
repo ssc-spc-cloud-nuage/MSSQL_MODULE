@@ -122,8 +122,6 @@ variable "week_of_year" {
 
 
 variable "policyretention_days" {
-  default     = "short_term_retention_policy {
-    retention_days = 1   
-  }"
+  default     = "short_term_retention_policy {retention_days = 1}"
 }
   
