@@ -20,8 +20,7 @@ resource "azurerm_mssql_database" "mssql" {
     short_term_retention_policy {
       retention_days = var.policyretention_days
     }
-      
-
+    
     long_term_retention_policy {
         weekly_retention = var.weekly_retention
         monthly_retention = var.monthly_retention
