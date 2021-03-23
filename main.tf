@@ -18,7 +18,7 @@ resource "azurerm_mssql_database" "mssql" {
     zone_redundant = var.zone_redundant
 
     short_term_retention_policy {
-      retention_days = 1
+      retention_days = var.policyretention_days
     }
       
 

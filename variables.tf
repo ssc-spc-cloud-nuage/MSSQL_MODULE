@@ -118,6 +118,6 @@ variable "week_of_year" {
 
 
 variable "policyretention_days" {
-  default     = 1
+  default     = 7
 }
   
