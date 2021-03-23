@@ -104,24 +104,20 @@ variable "environment" {
 }
 
 variable "weekly_retention" {
-  default     = ""
+  default     = null
 }
 variable "monthly_retention" {
-  default     = ""
+  default     = null
 }
 variable "yearly_retention" {
-  default     = ""
+  default     = null
 }
 variable "week_of_year" {
-  default     = ""
+  default     = null
 }
-
-# variable "policyretention_days" {
-#   default     = ""
-# }
 
 
 variable "policyretention_days" {
-  default     = "short_term_retention_policy {retention_days = 1}"
+  default     = "1"
 }
   
