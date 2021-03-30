@@ -103,6 +103,10 @@ variable "environment" {
   description = ""
 }
 
+variable "deploy" {
+  default     = false
+}
+
 variable "weekly_retention" {
  
 }
