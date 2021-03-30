@@ -6,6 +6,11 @@ resource "azurerm_mssql_server" "mssql" {
   administrator_login           = var.administrator_login
   administrator_login_password  = var.administrator_login_password
   public_network_access_enabled = false  
+
+  azuread_administrator {
+    login_username =   "louis-eric.tremblay@ssc-spc.gc.ca"
+    object_id           = var.active_directory_administrator_object_id
+  }
 }
 
 resource "azurerm_mssql_database" "mssql" {          
@@ -51,13 +56,13 @@ resource "azurerm_mssql_server_security_alert_policy" "mssql" {
   retention_days = 30
 }
 
-resource "azurerm_sql_active_directory_administrator" "mssql" {  
-  server_name         = azurerm_mssql_server.mssql.name
-  resource_group_name = var.resource_group_name
-  login               = "louis-eric.tremblay@ssc-spc.gc.ca"
-  tenant_id           = var.active_directory_administrator_tenant_id
-  object_id           = var.active_directory_administrator_object_id
-}
+# resource "azurerm_sql_active_directory_administrator" "mssql" {  
+#   server_name         = azurerm_mssql_server.mssql.name
+#   resource_group_name = var.resource_group_name
+#   login               = "louis-eric.tremblay@ssc-spc.gc.ca"
+#   tenant_id           = var.active_directory_administrator_tenant_id
+#   object_id           = var.active_directory_administrator_object_id
+# }
 
 resource "azurerm_private_endpoint" "mssql" { 
   name                = "${var.environment}-cio-${var.sqlname}-pe"
