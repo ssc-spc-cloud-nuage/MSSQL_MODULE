@@ -11,10 +11,10 @@ output "administrator_login" {
 }
 
 output "active_directory_administrator_tenant_id" {
-  value = azurerm_sql_active_directory_administrator.mssql.active_directory_administrator_tenant_id
+  value = azurerm_sql_active_directory_administrator.mssql.tenant_id
 }
 output "active_directory_administrator_object_id" {
-  value = azurerm_sql_active_directory_administrator.mssql.active_directory_administrator_object_id
+  value = azurerm_sql_active_directory_administrator.mssql.object_id
 }
 
 # Part of a hack for module-to-module dependencies.
