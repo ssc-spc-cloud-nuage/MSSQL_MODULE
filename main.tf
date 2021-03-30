@@ -25,7 +25,8 @@ resource "azurerm_mssql_server" "mssql" {
   }
 }
 
-resource "azurerm_mssql_database" "mssql" {          
+resource "azurerm_mssql_database" "mssql" { 
+  count = "${var.deploy == false ? 0 : 1}"         
     name           = "${var.environment}-cio-${var.sqldbname}"
     server_id      = azurerm_mssql_server.mssql.id
     collation      = var.collation
