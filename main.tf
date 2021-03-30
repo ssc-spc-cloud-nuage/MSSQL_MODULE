@@ -4,18 +4,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.52.0"
     }
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "~> 0.11.0"
-    }
   }
-  required_version = ">= 0.13"
-  backend "azurerm" {}
 }
 
-provider "azurerm" {
-  features {}
-}
+
 
 resource "azurerm_mssql_server" "mssql" {  
   name                          = "${var.environment}-cio-${var.sqlname}"
