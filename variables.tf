@@ -2,7 +2,14 @@
 
 variable "server" {
   description = "The name of the MSSQL Server"
-  type        = map(string)
+  type = object({
+            sqlname                       = string        
+            resource_group_name           = string
+            mssql_version                 = string
+            administrator_login           = string
+            administrator_login_password  = string
+            sql_database = []
+  })
 }
 
 # variable "sqlname" {
