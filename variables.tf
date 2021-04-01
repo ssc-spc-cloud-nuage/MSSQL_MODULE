@@ -2,6 +2,7 @@
 
 variable "server" {
   description = "The name of the MSSQL Server"
+  type        = list(map(string))
 }
 
 # variable "sqlname" {
