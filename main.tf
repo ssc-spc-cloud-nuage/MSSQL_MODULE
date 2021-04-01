@@ -10,6 +10,7 @@ terraform {
 
 resource "azurerm_mssql_server" "mssql" {  
   for_each s in var.server 
+  {
     name                          = "${var.environment}-cio-${s.sqlname}"
     location                      = s.location
     resource_group_name           = s.resource_group_name
@@ -17,12 +18,13 @@ resource "azurerm_mssql_server" "mssql" {
     administrator_login           = s.administrator_login
     administrator_login_password  = s.administrator_login_passworde        
     public_network_access_enabled = false
-
-  azuread_administrator {
-    login_username =   "louis-eric.tremblay@ssc-spc.gc.ca"
-    tenant_id           = var.active_directory_administrator_tenant_id
-    object_id           = var.active_directory_administrator_object_id
-  }  
+     
+    azuread_administrator {
+      login_username =   "louis-eric.tremblay@ssc-spc.gc.ca"
+      tenant_id           = var.active_directory_administrator_tenant_id
+      object_id           = var.active_directory_administrator_object_id
+    }   
+  } 
 }
 
 # resource "azurerm_mssql_database" "mssql" { 
