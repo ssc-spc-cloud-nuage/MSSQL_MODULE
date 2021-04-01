@@ -13,11 +13,6 @@ variable "server" {
 #   description = "A mapping of database name and collation for the MSSQL database(s)"
 # }
 
-variable "dependencies" {
-  type        = "list"
-  description = "Dependency management of resources"
-}
-
 # variable "administrator_login" {
 #   description = "The Administrator Login for the MSSQL Server"
 # }
