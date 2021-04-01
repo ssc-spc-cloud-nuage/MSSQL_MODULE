@@ -9,10 +9,9 @@ terraform {
 
 
 resource "azurerm_mssql_server" "mssql" {  
-  for_each s in var.server 
-  {
+   for (s in var.server) {
     name                          = "${var.environment}-cio-${s.sqlname}"
-    location                      = s.location
+    location                      = var.location
     resource_group_name           = s.resource_group_name
     version                       = s.mssql_version
     administrator_login           = s.administrator_login
@@ -24,7 +23,7 @@ resource "azurerm_mssql_server" "mssql" {
       tenant_id           = var.active_directory_administrator_tenant_id
       object_id           = var.active_directory_administrator_object_id
     }   
-  } 
+   }
 }
 
 # resource "azurerm_mssql_database" "mssql" { 
