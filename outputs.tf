@@ -1,13 +1,17 @@
-output "id" {
-  value = azurerm_mssql_server.mssql.id
-}
+# output "id" {
+#   value = azurerm_mssql_server.mssql.id
+# }
 
-output "name" {
-  value = azurerm_mssql_server.mssql.name
-}
+# output "name" {
+#   value = azurerm_mssql_server.mssql.name
+# }
 
-output "administrator_login" {
-  value = azurerm_mssql_server.mssql.administrator_login
+# output "administrator_login" {
+#   value = azurerm_mssql_server.mssql.administrator_login
+# }
+
+output "server" {
+  value = var.server
 }
 
 

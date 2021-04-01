@@ -8,33 +8,31 @@ terraform {
 }
 
 
-resource "azurerm_mssql_server" "mssql" {  
-   for_each = [for s in var.server : {
-    name                          = "${var.environment}-cio-${s.sqlname}"
-    location                      = s.location
-    resource_group_name           = s.resource_group_name
-    version                       = s.mssql_version
-    administrator_login           = s.administrator_login
-    administrator_login_password  = s.administrator_login_password
-    public_network_access_enabled = false
-    }]
-    content {
-      name                          = "${var.environment}-cio-${server.value.sqlname}"
-      location                      = server.value.location
-      resource_group_name           = server.value.resource_group_name
-      version                       = server.value.mssql_version
-      administrator_login           = server.value.administrator_login
-      administrator_login_password  = server.value.administrator_login_password
-      public_network_access_enabled = false
-    }    
-  
+# resource "azurerm_mssql_server" "mssql" {  
+#    for_each = [for s in var.server : {
+#     name                          = "${var.environment}-cio-${s.sqlname}"
+#     location                      = s.location
+#     resource_group_name           = s.resource_group_name
+#     version                       = s.mssql_version
+#     administrator_login           = s.administrator_login
+#     administrator_login_password  = s.administrator_login_passworde
+#     }]
+#     content {
+#       name                          = "${var.environment}-cio-${server.value.sqlname}"
+#       location                      = server.value.location
+#       resource_group_name           = server.value.resource_group_name
+#       version                       = server.value.mssql_version
+#       administrator_login           = server.value.administrator_login
+#       administrator_login_password  = server.value.administrator_login_password      
+#     }    
+#   public_network_access_enabled = false
 
-  azuread_administrator {
-    login_username =   "louis-eric.tremblay@ssc-spc.gc.ca"
-    tenant_id           = var.active_directory_administrator_tenant_id
-    object_id           = var.active_directory_administrator_object_id
-  }  
-}
+#   azuread_administrator {
+#     login_username =   "louis-eric.tremblay@ssc-spc.gc.ca"
+#     tenant_id           = var.active_directory_administrator_tenant_id
+#     object_id           = var.active_directory_administrator_object_id
+#   }  
+# }
 
 # resource "azurerm_mssql_database" "mssql" { 
 #   #count = "${var.deploy == false ? 0 : 1}"         
