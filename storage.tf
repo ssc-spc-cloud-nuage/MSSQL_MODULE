@@ -1,6 +1,6 @@
 #Storage Accounts
 resource "azurerm_storage_account" "mssql" {    
-    name                          = "${var.environment}cio${var.server["sqlname"]}"
+    name                          = "${var.environment}${var.server["sqlname"]}"
     location                      =  var.location
     resource_group_name           =  var.server["resource_group_name"]
     account_tier                  = "Standard"
