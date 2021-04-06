@@ -8,8 +8,7 @@ terraform {
 }
 
 
-resource "azurerm_mssql_server" "mssql" {  
-   for_each = var.server
+resource "azurerm_mssql_server" "mssql" {     
     name                          = "${var.environment}-cio-${var.server["sqlname"]}"
     location                      = var.location
     resource_group_name           = var.server["resource_group_name"]
