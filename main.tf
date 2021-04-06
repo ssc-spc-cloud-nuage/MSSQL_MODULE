@@ -26,7 +26,7 @@ resource "azurerm_mssql_server" "mssql" {
 }
 
 resource "azurerm_mssql_database" "mssql" {    
-  for_each  =  var.server[SQL_Database]  
+  for_each  =  var.server.SQL_Database 
     name           = "${var.environment}-cio-${each.value.sqldbname}"
     server_id      = azurerm_mssql_server.mssql.id
     collation      = each.value.collation
