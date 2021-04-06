@@ -10,12 +10,12 @@ terraform {
 
 resource "azurerm_mssql_server" "mssql" {  
    for_each = var.server
-    name                          = "${var.environment}-cio-${var.server.sqlname}"
+    name                          = "${var.environment}-cio-${var.server["sqlname"]}"
     location                      = var.location
-    resource_group_name           = var.server.resource_group_name
-    version                       = var.server.mssql_version
-    administrator_login           = var.server.administrator_login
-    administrator_login_password  = var.server.administrator_login_password       
+    resource_group_name           = var.server["resource_group_name"]
+    version                       = var.server["mssql_version"]
+    administrator_login           = var.server["administrator_login"]
+    administrator_login_password  = var.server["administrator_login_password"]       
     public_network_access_enabled = false
      
     azuread_administrator {
