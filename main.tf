@@ -90,7 +90,7 @@ resource "azurerm_private_endpoint" "mssql" {
   subnet_id           = var.subnet_id
 
   private_dns_zone_group {
-    name = "${var.sqlname}privatednszonegroup"
+    name = "${var.server["sqlname"]}privatednszonegroup"
     private_dns_zone_ids = [var.DnsPrivatezoneId]
   }
 
