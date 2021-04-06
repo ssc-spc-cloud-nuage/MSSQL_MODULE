@@ -1,4 +1,4 @@
-Storage Accounts
+#Storage Accounts
 resource "azurerm_storage_account" "mssql" {    
     name                          = "${var.environment}-cio-${var.server["sqlname"]}"
     location                      =  var.location
