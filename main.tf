@@ -26,15 +26,15 @@ resource "azurerm_mssql_server" "mssql" {
 }
 
 resource "azurerm_mssql_database" "mssql" {    
-  for_each  =  var.server.SQL_Database 
-    name           = "${var.environment}-cio-${each.value.sqldbname}"
+  
+    name           = "${var.environment}-cio-${ var.server["SQL_Database"]["sqldbname"]}"
     server_id      = azurerm_mssql_server.mssql.id
-    collation      = each.value.collation
+    collation      = var.server["SQL_Database"]["collation"]
     license_type   = "LicenseIncluded"
-    max_size_gb    = each.value.max_size_gb
-    read_scale     = each.value.read_scale
-    sku_name       = each.value.sku_name
-    zone_redundant = each.value.zone_redundant
+    max_size_gb    = var.server["SQL_Database"]["max_size_gb"]
+    read_scale     = var.server["SQL_Database"]["read_scale"]
+    sku_name       = var.server["SQL_Database"]["sku_name"]
+    zone_redundant = var.server["SQL_Database"]["zone_redundant"]
 
     # dynamic "short_term_retention_policy" {
     #    for_each = var.policyretention_days == null ? [] : [var.policyretention_days]
