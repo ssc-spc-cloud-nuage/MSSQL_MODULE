@@ -26,7 +26,6 @@ resource "azurerm_mssql_server" "mssql" {
 }
 
 resource "azurerm_mssql_database" "mssql" {    
-  
     name           = "${var.environment}-cio-${var.server["SQL_Database"]["sqldbname"]}"
     server_id      = azurerm_mssql_server.mssql.id
     collation      = var.server["SQL_Database"]["collation"]
