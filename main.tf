@@ -25,34 +25,33 @@ resource "azurerm_mssql_server" "mssql" {
   
 }
 
-# resource "azurerm_mssql_database" "mssql" { 
-#   #count = "${var.deploy == false ? 0 : 1}"         
-#     name           = "${var.environment}-cio-${var.sqldbname}"
-#     server_id      = azurerm_mssql_server.mssql.id
-#     collation      = var.collation
-#     license_type = "LicenseIncluded"
-#     max_size_gb    = var.max_size_gb
-#     read_scale     = var.read_scale
-#     sku_name       = var.sku_name
-#     zone_redundant = var.zone_redundant
+resource "azurerm_mssql_database" "mssql" {           
+    name           = "${var.environment}-cio-${var.server["SQL_Database"].sqldbname}"
+    server_id      = azurerm_mssql_server.mssql.id
+    collation      = var.server["SQL_Database"].collation
+    license_type = "LicenseIncluded"
+    max_size_gb    = var.server["SQL_Database"].max_size_gb
+    read_scale     = var.server["SQL_Database"].read_scale
+    sku_name       = var.server["SQL_Database"].sku_name
+    zone_redundant = var.server["SQL_Database"].zone_redundant
 
-#     dynamic "short_term_retention_policy" {
-#        for_each = var.policyretention_days == null ? [] : [var.policyretention_days]
-#       content {
-#         retention_days = var.policyretention_days
-#       }     
-#     }
+    # dynamic "short_term_retention_policy" {
+    #    for_each = var.policyretention_days == null ? [] : [var.policyretention_days]
+    #   content {
+    #     retention_days = var.policyretention_days
+    #   }     
+    # }
     
-#     dynamic "long_term_retention_policy" {
-#       for_each = var.week_of_year == null ? [] : [var.week_of_year]
-#       content {
-#         weekly_retention = var.weekly_retention
-#         monthly_retention = var.monthly_retention
-#         yearly_retention = var.yearly_retention
-#         week_of_year =  var.week_of_year
-#       }
-#     }
-# }
+    # dynamic "long_term_retention_policy" {
+    #   for_each = var.week_of_year == null ? [] : [var.week_of_year]
+    #   content {
+    #     weekly_retention = var.weekly_retention
+    #     monthly_retention = var.monthly_retention
+    #     yearly_retention = var.yearly_retention
+    #     week_of_year =  var.week_of_year
+    #   }
+    # }
+}
 
 resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" { 
   server_id                               = azurerm_mssql_server.mssql.id
