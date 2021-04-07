@@ -37,7 +37,7 @@ resource "azurerm_mssql_database" "mssql" {
     name           = "${var.environment}-cio-${each.value.sqldbname}"
     server_id      = azurerm_mssql_server.mssql.id
     collation      = each.value.collation
-    license_type   = "LicenseIncluded"
+    license_type   = each.value.license_type
     max_size_gb    = each.value.max_size_gb
     read_scale     = each.value.read_scale
     sku_name       = each.value.sku_name
