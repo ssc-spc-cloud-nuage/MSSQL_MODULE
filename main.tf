@@ -9,7 +9,7 @@ terraform {
 
 locals {
     deploydbs = {
-    for x in var.server : 
+    for x in var.server.SQL_Database : 
       "${x.sqlname}" => x if lookup(x, "deploy", true) != false
   }
 }
