@@ -51,12 +51,12 @@ resource "azurerm_mssql_database" "mssql" {
     }
     
     dynamic "long_term_retention_policy" {
-      for_each = var.week_of_year == null ? [] : [var.week_of_year]
+      for_each = each.value.week_of_year == null ? [] : [each.value.week_of_year]
       content {
-        weekly_retention = var.weekly_retention
-        monthly_retention = var.monthly_retention
-        yearly_retention = var.yearly_retention
-        week_of_year =  var.week_of_year
+        weekly_retention = each.value.weekly_retention
+        monthly_retention = each.value.monthly_retention
+        yearly_retention = each.value.yearly_retention
+        week_of_year =  each.value.week_of_year
       }
     }
 }
