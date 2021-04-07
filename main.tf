@@ -50,15 +50,15 @@ resource "azurerm_mssql_database" "mssql" {
       }     
     }
     
-    # dynamic "long_term_retention_policy" {
-    #   for_each = var.week_of_year == null ? [] : [var.week_of_year]
-    #   content {
-    #     weekly_retention = var.weekly_retention
-    #     monthly_retention = var.monthly_retention
-    #     yearly_retention = var.yearly_retention
-    #     week_of_year =  var.week_of_year
-    #   }
-    # }
+    dynamic "long_term_retention_policy" {
+      for_each = var.week_of_year == null ? [] : [var.week_of_year]
+      content {
+        weekly_retention = var.weekly_retention
+        monthly_retention = var.monthly_retention
+        yearly_retention = var.yearly_retention
+        week_of_year =  var.week_of_year
+      }
+    }
 }
 
 resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" { 
