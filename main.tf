@@ -25,7 +25,7 @@ resource "azurerm_mssql_server" "mssql" {
     public_network_access_enabled = false
      
     azuread_administrator {
-      login_username =   "louis-eric.tremblay@ssc-spc.gc.ca"
+      login_username      = var.server["login_username"]
       tenant_id           = var.active_directory_administrator_tenant_id
       object_id           = var.active_directory_administrator_object_id
     }   
@@ -43,12 +43,12 @@ resource "azurerm_mssql_database" "mssql" {
     sku_name       = each.value.sku_name
     zone_redundant = each.value.zone_redundant
 
-    # dynamic "short_term_retention_policy" {
-    #    for_each = var.policyretention_days == null ? [] : [var.policyretention_days]
-    #   content {
-    #     retention_days = var.policyretention_days
-    #   }     
-    # }
+    dynamic "short_term_retention_policy" {
+       for_each =  each.value.policyretention_days == null ? [] : [ each.value.policyretention_days]
+      content {
+        retention_days =  each.value.policyretention_days
+      }     
+    }
     
     # dynamic "long_term_retention_policy" {
     #   for_each = var.week_of_year == null ? [] : [var.week_of_year]
