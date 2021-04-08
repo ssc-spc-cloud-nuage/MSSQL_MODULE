@@ -24,12 +24,14 @@ resource "azurerm_mssql_server" "mssql" {
     administrator_login_password  = var.server["administrator_login_password"]       
     public_network_access_enabled = false
      
-    azuread_administrator {
-      login_username      = var.server["login_username"]
-      tenant_id           = var.active_directory_administrator_tenant_id
-      object_id           = var.active_directory_administrator_object_id
-    }   
-  
+    dynamic "azuread_administrator" {
+       for_each =  var.server["login_username"] == null ? [] : [var.server["login_username"]]
+        content {
+          login_username      = var.server["login_username"]
+          tenant_id           = var.active_directory_administrator_tenant_id
+          object_id           = var.active_directory_administrator_object_id
+        }         
+    }     
 }
 
 resource "azurerm_mssql_database" "mssql" {    
