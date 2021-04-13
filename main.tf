@@ -84,14 +84,6 @@ resource "azurerm_mssql_server_security_alert_policy" "mssql" {
   retention_days = 30
 }
 
-# resource "azurerm_sql_active_directory_administrator" "mssql" {  
-#   server_name         = azurerm_mssql_server.mssql.name
-#   resource_group_name = var.resource_group_name
-#   login               = "louis-eric.tremblay@ssc-spc.gc.ca"
-#   tenant_id           = var.active_directory_administrator_tenant_id
-#   object_id           = var.active_directory_administrator_object_id
-# }
-
 resource "azurerm_private_endpoint" "mssql" { 
   name                = "${var.environment}-cio-${var.server["sqlname"]}-pe"
   location            = var.location
