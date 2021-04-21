@@ -111,7 +111,7 @@ data "azurerm_private_endpoint_connection" "plinkconnection" {
 resource "azurerm_private_dns_a_record" "private_endpoint_a_record" {
   name                = "${azurerm_mssql_server.mssql.name}"
   zone_name           = "privatelink.azuredatabase.net"
-  resource_group_name = "${var.environment}-CIO_VCBOARDROOM_DNS-rg"
+  resource_group_name = "ScDc-CIO_VCBOARDROOM_Project_MSSQL-rg" #"${var.environment}-CIO_VCBOARDROOM_DNS-rg"
   ttl                 = 300
   records             = ["${data.azurerm_private_endpoint_connection.plinkconnection.private_service_connection.0.private_ip_address}"]
 }
