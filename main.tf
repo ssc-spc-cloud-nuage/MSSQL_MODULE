@@ -103,6 +103,19 @@ resource "azurerm_private_endpoint" "mssql" {
   }
 }
 
+data "azurerm_private_endpoint_connection" "plinkconnection" {
+  name                = "${azurerm_private_endpoint.mssql.name}"
+  resource_group_name = "${azurerm_private_endpoint.mssql.resource_group_name}"
+}
+
+resource "azurerm_private_dns_a_record" "private_endpoint_a_record" {
+  name                = "${azurerm_mssql_server.mssql.name}"
+  zone_name           = "privatelink.azuredatabase.net"
+  resource_group_name = "${azurerm_private_endpoint.mssql.resource_group_name}"
+  ttl                 = 300
+  records             = ["${data.azurerm_private_endpoint_connection.plinkconnection.private_service_connection.0.private_ip_address}"]
+}
+
 # output "private_link_endpoint_ip03" {
 #   value = "${azurerm_private_endpoint.CIO-vcboardroom-pe.private_service_connection.0.private_ip_address}"
 #}
