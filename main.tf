@@ -88,7 +88,7 @@ resource "azurerm_private_endpoint" "mssql" {
   name                = "${var.environment}-cio-${var.server["sqlname"]}-pe"
   location            = var.location
   resource_group_name = var.server["resource_group_name"] //"ScDc-CIO_APS_Network-rg"
-  subnet_id           = var.subnet_id_EP
+  subnet_id           = var.subnet_id
 
   private_dns_zone_group {
     name = "${var.server["sqlname"]}privatednszonegroup"
