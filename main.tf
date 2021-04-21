@@ -61,6 +61,8 @@ resource "azurerm_mssql_database" "mssql" {
         week_of_year =  each.value.week_of_year
       }
     }
+
+    depends_on =[azurerm_mssql_server.mssql]
 }
 
 resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" { 
@@ -69,6 +71,7 @@ resource   "azurerm_mssql_server_extended_auditing_policy" "mssql" {
   storage_account_access_key              = azurerm_storage_account.mssql.primary_access_key
   storage_account_access_key_is_secondary = false
   retention_in_days                       = 6
+  depends_on =[azurerm_mssql_server.mssql, azurerm_storage_account.mssql]
 } 
 
 resource "azurerm_mssql_server_security_alert_policy" "mssql" {  
@@ -82,6 +85,7 @@ resource "azurerm_mssql_server_security_alert_policy" "mssql" {
     "Data_Exfiltration"
   ]
   retention_days = 30
+  depends_on =[azurerm_mssql_server.mssql, azurerm_storage_account.mssql]
 }
 
 resource "azurerm_private_endpoint" "mssql" { 
@@ -101,6 +105,7 @@ resource "azurerm_private_endpoint" "mssql" {
     subresource_names              = ["sqlServer"]
     is_manual_connection           = false
   }
+  depends_on =[azurerm_mssql_server.mssql]
 }
 
 data "azurerm_private_endpoint_connection" "plinkconnection" {
@@ -113,7 +118,7 @@ data "azurerm_private_endpoint_connection" "plinkconnection" {
 resource "azurerm_private_dns_a_record" "private_endpoint_a_record" {
   name                = "${azurerm_mssql_server.mssql.name}"
   zone_name           = "privatelink.azuredatabase.net"
-  resource_group_name = "ScDc-CIO_VCBOARDROOM_Project_MSSQL-rg" #"${var.environment}-CIO_VCBOARDROOM_DNS-rg"
+  resource_group_name = "${var.environment}-CIO_VCBOARDROOM_DNS-rg"
   ttl                 = 300
   records             = ["${data.azurerm_private_endpoint_connection.plinkconnection.private_service_connection.0.private_ip_address}"]
  
