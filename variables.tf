@@ -41,3 +41,11 @@ variable "environment" {
 variable "deploy" {
   default     = false
 }
+
+variable "allow_nested_items_to_be_public" {
+  default     = true
+}
+
+variable "min_tls_version" {
+  default     = "TLS1_2"
+}
